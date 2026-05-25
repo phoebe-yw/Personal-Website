@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phoebe Wang — portfolio</title>
+  <meta name="description" content="Phoebe Wang's portfolio — CS student at UT Austin, incoming PM intern at IBM." />
+
+  <!-- Preconnect speeds up the Google Fonts request -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <!-- Skip link lets keyboard users jump past the decorative folder to the content -->
+  <a href="#folder-page" class="skip-link">skip to content</a>
+
+  <main class="scene">
+    <div class="folder-wrap">
+
+      <!-- The tab/notch at the top of the folder, like a real manila folder -->
+      <button class="folder__notch" aria-label="Close folder">
+        <span class="sr-only">close folder</span>
+      </button>
+
+      <!-- The kraft folder body -->
+      <div class="folder" id="folder">
+        <!-- Thicker bottom strip — gives the illusion that pages are stacked inside -->
+        <div class="folder__edge" aria-hidden="true"></div>
+
+        <!-- The cream page shown when the folder is open -->
+        <div class="folder__page" id="folder-page" aria-live="polite">
+          <!-- JavaScript fills this with the active section's HTML -->
+        </div>
+
+        <!-- The kraft cover shown when the folder is closed -->
+        <div class="folder__cover" aria-hidden="true">
+          <div class="folder__label">
+            <p class="folder__label-name">Phoebe Wang</p>
+            <p class="folder__label-sub">ut austin &middot; computer science &middot; portfolio</p>
+          </div>
+        </div>
+      </div><!-- end .folder -->
+
+      <!-- The seven tabs sticking out the right edge -->
+      <nav class="folder__tabs" aria-label="Portfolio sections">
+        <button class="tab" data-section="about"      role="tab" aria-selected="false" aria-controls="folder-page">about</button>
+        <button class="tab" data-section="experience" role="tab" aria-selected="false" aria-controls="folder-page">experience</button>
+        <button class="tab" data-section="projects"   role="tab" aria-selected="false" aria-controls="folder-page">projects</button>
+        <button class="tab" data-section="skills"     role="tab" aria-selected="false" aria-controls="folder-page">skills</button>
+        <button class="tab" data-section="resume"     role="tab" aria-selected="false" aria-controls="folder-page">r&eacute;sum&eacute;</button>
+        <button class="tab" data-section="contact"    role="tab" aria-selected="false" aria-controls="folder-page">contact</button>
+        <button class="tab" data-section="journal"    role="tab" aria-selected="false" aria-controls="folder-page">journal</button>
+      </nav>
+
+    </div><!-- end .folder-wrap -->
+  </main>
+
+  <!-- Theme toggle sits in a fixed corner -->
+  <button class="theme-toggle" aria-label="Switch to dark theme" title="Toggle dark / light theme">
+    <!-- Sun icon (shown in dark mode to switch back to light) -->
+    <svg class="icon icon-sun" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+    <!-- Moon icon (shown in light mode to switch to dark) -->
+    <svg class="icon icon-moon" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

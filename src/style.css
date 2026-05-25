@@ -1,0 +1,691 @@
+/* ─────────────────────────────────────────────────────────────
+   PHOEBE WANG PORTFOLIO — STYLESHEET
+   Structure:
+     1. Color tokens (both themes)
+     2. Reset & base
+     3. Scene & folder layout
+     4. Folder: notch, body, edge
+     5. Folder: cover (closed state)
+     6. Folder: page (open state)
+     7. Tabs
+     8. Section content
+     9. Theme toggle
+    10. Utilities
+    11. Mobile (≤ 640px)
+    12. Accessibility
+───────────────────────────────────────────────────────────── */
+
+
+/* ── 1. COLOR TOKENS ─────────────────────────────────────── */
+
+:root {
+  /* Light — "manila afternoon" */
+  --bg:           #EDE6D6;   /* bone parchment, the desk surface */
+  --kraft:        #C5A97A;   /* warm kraft / manila cardstock */
+  --kraft-edge:   #A8895C;   /* darker strip showing folder thickness */
+  --tab-off:      #B9A882;   /* unselected tab */
+  --tab-on:       #D4C4A6;   /* active tab — lighter, pulls forward */
+  --page:         #F5EFE0;   /* cream interior page */
+  --text-h:       #2E2419;   /* dark espresso — headings */
+  --text-body:    #524437;   /* warm brown — body copy */
+  --text-muted:   #8A7B68;   /* dates, labels, secondary info */
+  --chip-bg:      #E8DCC6;   /* skill chip background */
+  --chip-text:    #3D2E1C;   /* skill chip text */
+  --divider:      #E0D4BC;   /* thin horizontal rules */
+  --shadow-sm:    rgba(46, 36, 25, 0.08);
+  --shadow-md:    rgba(46, 36, 25, 0.16);
+  --shadow-lg:    rgba(46, 36, 25, 0.30);
+  --focus-ring:   #7A5C34;
+
+  /* Typography */
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
+  --font-sans:    'DM Sans', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  /* Dark — "espresso cabinet" */
+  --bg:           #181613;
+  --kraft:        #2D2520;
+  --kraft-edge:   #1A1310;
+  --tab-off:      #3E3530;
+  --tab-on:       #574D46;
+  --page:         #29231F;
+  --text-h:       #EAE0D0;
+  --text-body:    #C2B5A4;
+  --text-muted:   #7A6E62;
+  --chip-bg:      #3D342E;
+  --chip-text:    #C2B5A4;
+  --divider:      #3A3028;
+  --shadow-sm:    rgba(0, 0, 0, 0.20);
+  --shadow-md:    rgba(0, 0, 0, 0.38);
+  --shadow-lg:    rgba(0, 0, 0, 0.55);
+  --focus-ring:   #C2B5A4;
+}
+
+
+/* ── 2. RESET & BASE ─────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text-body);
+  height: 100dvh;
+  overflow: hidden; /* page itself never scrolls; only the cream page inside scrolls */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: inherit;
+}
+
+
+/* ── 3. SCENE & FOLDER LAYOUT ────────────────────────────── */
+
+.scene {
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 100px 64px 32px; /* extra right padding for the tabs */
+  overflow: hidden;
+}
+
+/* folder-wrap is the sizing container; everything inside it is positioned relative to it */
+.folder-wrap {
+  position: relative;
+  width: min(820px, calc(100vw - 120px));
+  /* The drop-shadow follows the real shape of the element (including tabs) */
+  filter: drop-shadow(0 18px 40px var(--shadow-lg));
+}
+
+
+/* ── 4. FOLDER: NOTCH, BODY, EDGE ────────────────────────── */
+
+/* The tab/notch at the top center — looks like a real folder's top tab */
+.folder__notch {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 108px;
+  height: 22px;
+  background: var(--kraft);
+  /* Trapezoidal clip: narrower at the top, wider at the bottom */
+  clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
+  transition: background 0.15s ease;
+  z-index: 5;
+}
+
+.folder__notch:hover {
+  background: var(--tab-on);
+}
+
+.folder__notch:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* The main kraft body */
+.folder {
+  position: relative;
+  width: 100%;
+  /* Tall enough to feel substantial, short enough to fit in most viewports */
+  height: min(540px, calc(100dvh - 130px));
+  background: var(--kraft);
+  border-radius: 10px;
+  box-shadow: inset 0 0 80px var(--shadow-sm);
+  transition: background 0.3s ease;
+  overflow: hidden;
+}
+
+/* Bottom strip — a slightly darker shade that reads as the folder's thickness */
+.folder__edge {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 7px;
+  background: var(--kraft-edge);
+  border-radius: 0 0 8px 8px;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+
+/* ── 5. FOLDER: COVER (closed state) ─────────────────────── */
+
+.folder__cover {
+  position: absolute;
+  inset: 12px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Never intercept pointer/scroll events — opening is handled by tabs and the notch */
+  pointer-events: none;
+}
+
+/* The small printed label in the center of the cover */
+.folder__label {
+  background: var(--page);
+  border-radius: 4px;
+  padding: 14px 28px;
+  text-align: center;
+  transform: rotate(-1deg);
+  box-shadow: 0 2px 8px var(--shadow-md);
+}
+
+.folder__label-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-h);
+  letter-spacing: 0.02em;
+}
+
+.folder__label-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+
+/* ── 6. FOLDER: PAGE (open state) ────────────────────────── */
+
+.folder__page {
+  position: relative;
+  margin: 14px;
+  margin-bottom: 21px; /* leave room for the edge strip */
+  /* Fill the folder's height minus top + bottom margins */
+  height: calc(100% - 35px);
+  background: var(--page);
+  border-radius: 6px;
+  padding: 24px 28px;
+  overflow-y: auto;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: background 0.3s ease;
+  box-shadow: inset 0 0 0 1px var(--shadow-sm);
+}
+
+/* Subtle scrollbar so it doesn't look ugly */
+.folder__page::-webkit-scrollbar { width: 5px; }
+.folder__page::-webkit-scrollbar-track { background: transparent; }
+.folder__page::-webkit-scrollbar-thumb { background: var(--divider); border-radius: 3px; }
+
+
+/* ── 7. TABS ─────────────────────────────────────────────── */
+
+.folder__tabs {
+  position: absolute;
+  /* sits flush with the right edge of the folder, tabs extend outward */
+  left: calc(100% - 10px);
+  top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.tab {
+  display: block;
+  width: 88px;
+  padding: 9px 10px 9px 18px;
+  background: var(--tab-off);
+  border-radius: 0 7px 7px 0;
+  font-family: var(--font-sans);
+  font-size: 0.70rem;
+  font-weight: 400;
+  color: var(--text-body);
+  letter-spacing: 0.03em;
+  text-align: left;
+  transition: transform 0.14s ease, background 0.14s ease, color 0.14s ease;
+}
+
+.tab:hover {
+  transform: translateX(4px);
+  background: var(--tab-on);
+}
+
+.tab--active {
+  background: var(--tab-on);
+  transform: translateX(8px);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+
+/* ── 8. SECTION CONTENT ──────────────────────────────────── */
+
+/* Each section shares these base styles */
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-h);
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+
+.section-rule {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin-bottom: 14px;
+}
+
+/* --- About section --- */
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--chip-bg);
+  color: var(--text-h);
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+
+.about-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.about-role {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* --- Body text --- */
+
+.body-text {
+  font-size: 0.80rem;
+  line-height: 1.70;
+  color: var(--text-body);
+}
+
+/* --- Chips / tags --- */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  background: var(--chip-bg);
+  color: var(--chip-text);
+  font-size: 0.68rem;
+  font-weight: 400;
+  padding: 4px 11px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+
+/* --- Experience & Projects entries --- */
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.entry {
+  padding: 10px 0;
+  border-top: 1px solid var(--divider);
+}
+
+.entry:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.entry-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.entry-org {
+  font-size: 0.80rem;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.entry-role {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.entry-date {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.entry-bullets {
+  list-style: none;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.entry-bullets li {
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: var(--text-body);
+  padding-left: 14px;
+  position: relative;
+}
+
+.entry-bullets li::before {
+  content: '·';
+  position: absolute;
+  left: 3px;
+  color: var(--text-muted);
+}
+
+/* --- Skills section --- */
+
+.skills-group {
+  margin-bottom: 16px;
+}
+
+.skills-group-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  margin-bottom: 7px;
+}
+
+/* --- Résumé section --- */
+
+.resume-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--chip-bg);
+  color: var(--text-h);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 14px;
+  transition: background 0.15s ease;
+}
+
+.resume-cta:hover {
+  background: var(--tab-on);
+}
+
+.resume-cta:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* --- Contact section --- */
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--divider);
+  font-size: 0.78rem;
+  color: var(--text-body);
+  text-decoration: none;
+}
+
+.contact-row:first-of-type {
+  border-top: none;
+}
+
+.contact-row:hover {
+  color: var(--text-h);
+}
+
+.contact-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+/* --- Journal section --- */
+
+.post-article {
+  margin-bottom: 20px;
+}
+
+.post-date {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.post-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-h);
+  margin-bottom: 10px;
+}
+
+.post-body {
+  font-size: 0.78rem;
+  line-height: 1.72;
+  color: var(--text-body);
+}
+
+.post-body p + p {
+  margin-top: 10px;
+}
+
+.post-stub-list {
+  border-top: 1px solid var(--divider);
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post-stub {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.73rem;
+}
+
+.post-stub-date {
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.post-stub-title {
+  color: var(--text-body);
+}
+
+
+/* ── 9. THEME TOGGLE ─────────────────────────────────────── */
+
+.theme-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--chip-bg);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+  z-index: 100;
+  box-shadow: 0 2px 8px var(--shadow-md);
+}
+
+.theme-toggle:hover {
+  background: var(--tab-on);
+  color: var(--text-h);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.icon { width: 18px; height: 18px; }
+
+/* Show only the relevant icon per theme */
+[data-theme="light"]  .icon-sun  { display: none; }
+[data-theme="dark"]   .icon-moon { display: none; }
+
+
+/* ── 10. UTILITIES ───────────────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  background: var(--page);
+  color: var(--text-h);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  z-index: 200;
+}
+
+.skip-link:focus {
+  left: 8px;
+}
+
+.text-muted { color: var(--text-muted); }
+
+
+/* ── 11. MOBILE (≤ 640px) ────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .scene {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 12px 80px; /* bottom space for the tab row */
+    min-height: unset;
+  }
+
+  .folder-wrap {
+    width: 100%;
+    filter: drop-shadow(0 8px 20px var(--shadow-md));
+  }
+
+  /* On mobile the tabs move below the folder as a scrollable row */
+  .folder__tabs {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 12px;
+    padding: 0 4px;
+  }
+
+  .tab {
+    width: auto;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    transform: none !important; /* override the desktop slide-out */
+  }
+
+  .tab--active {
+    transform: none !important;
+  }
+
+  /* Hide the notch on mobile — closing happens by tapping the active tab */
+  .folder__notch {
+    display: none;
+  }
+
+  .folder {
+    height: min(420px, calc(100dvh - 200px));
+  }
+
+  .folder__page {
+    height: calc(100% - 35px);
+    padding: 18px 16px;
+  }
+}
+
+
+/* ── 12. ACCESSIBILITY ───────────────────────────────────── */
+
+/* Remove animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
