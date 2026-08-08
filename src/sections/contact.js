@@ -32,7 +32,7 @@ export default function contact() {
       <hr class="section-rule" />
 
       <p class="body-text" style="margin-bottom: 14px;">
-        Always happy to chat about product, research, robotics, or anything in between.
+        feel free to reach out!
       </p>
 
       ${links.map(l => `

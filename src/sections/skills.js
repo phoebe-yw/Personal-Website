@@ -1,11 +1,11 @@
 const groups = [
   {
     label: 'languages',
-    items: ['Python', 'Java', 'C', 'C++', 'ARM64 (AArch64)', 'HTML / CSS'],
+    items: ['Python', 'Java', 'C', 'C++', 'JavaScript', 'ARM64 (AArch64)', 'HTML / CSS'],
   },
   {
     label: 'tools & frameworks',
-    items: ['PyTorch', 'React Native', 'ROS', 'OpenCV', 'Matplotlib', 'MongoDB', 'Tableau', 'Arduino'],
+    items: ['PyTorch', 'ROS2', 'React Native', 'Flask', 'Node.js', 'Expo', 'OpenCV', 'YOLO', 'DINOv2', 'BERT', 'BERTopic', 'Matplotlib', 'MongoDB', 'Tableau', 'Jira', 'Arduino', 'Kortex API', 'watsonx Orchestrate'],
   },
   {
     label: 'developer tools',
@@ -13,7 +13,7 @@ const groups = [
   },
   {
     label: 'certifications',
-    items: ['Autodesk Fusion 360 Certified User', 'Version Control: Git & GitHub', 'GWC Cybersecurity', 'GWC Cryptography', 'BWSI Python Core'],
+    items: ['Autodesk Fusion 360 Certified User', 'Autodesk Revit Certified', 'Version Control: Git & GitHub', 'GWC Cybersecurity', 'GWC Cryptography', 'BWSI Python Core'],
   },
   {
     label: 'languages spoken',

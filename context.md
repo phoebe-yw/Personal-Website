@@ -7,11 +7,13 @@ steps, set up git from the start, and check with me before any big decision.
 ## About me (site owner)
 
 - Phoebe Wang — Computer Science student at UT Austin, graduating May 2028.
-- Incoming Product Manager Intern at IBM (Summer 2026, Lowell MA).
-- Undergraduate robotics researcher in UT's FRI Robot Learning lab.
-- Pinterest Engage participant; incoming Marketing Junior Officer for Texas ACM.
+- Current: Product Manager Intern at IBM – Guardium Data Protection (June 2026 – present, Lowell MA).
+- Former: Undergraduate Researcher & Summer Fellow in UT's RobIn (Robot Interactive Intelligence Lab) under Dr. Junhong Xu (Jan – May 2026).
+- Former: AI Strategist, Dell Technologies' Excel With Dell program (Feb – Apr 2026).
+- Marketing Junior Officer for Texas ACM (May 2026 – present).
+- Pinterest Engage participant (selected mentee, paired with Pinterest AI Platform engineer).
 - I also do short-form content creation and enjoy journaling.
-- The résumé and LinkedIn export in `./reference/` are the source of truth for my
+- The résumé PDF (last updated Aug 2026) is the source of truth for my
   experience, projects, skills, and education. Do NOT invent anything — ask me if
   something is unclear or missing.
 

@@ -1,0 +1,91 @@
+# Phoebe Wang — Portfolio
+
+A personal portfolio site built to look like a kraft paper file folder. Tabs on the right edge open each section; clicking an open tab (or the top notch) closes the folder.
+
+Built with [Vite](https://vitejs.dev/) + vanilla JavaScript, animated with [GSAP](https://gsap.com/).
+
+---
+
+## Running locally
+
+```bash
+npm install
+npm run dev
+```
+
+Then open `http://localhost:5173` in your browser.
+
+---
+
+## Editing your content
+
+| What to change | File to edit |
+|---|---|
+| About section | `src/sections/about.js` |
+| Experience | `src/sections/experience.js` |
+| Projects | `src/sections/projects.js` |
+| Skills | `src/sections/skills.js` |
+| Resume download | Replace `public/resume.pdf` with your updated PDF |
+| Contact links | `src/sections/contact.js` |
+| Journal posts | Drop a new `.md` file into `src/posts/` (see format below) |
+
+### Adding a journal post
+
+Create a `.md` file in `src/posts/` with this format:
+
+```markdown
+---
+title: my post title
+date: 2026-06-01
+---
+
+Your post content here. Markdown is fully supported.
+```
+
+{
+    org: 'Pinterest',
+    role: 'engage program participant',
+    date: 'apr 2026 – present',
+    location: '',
+    bullets: [],
+
+http://localhost:5173/Personal-Website/
+The newest post (by date) appears first automatically.
+
+---
+
+## Deploying to GitHub Pages
+
+**One-time setup:**
+1. Go to your repo on GitHub → Settings → Pages
+2. Under "Source", select "GitHub Actions"
+3. Save
+
+**Every deploy after that:**
+Just push to `main` — GitHub Actions builds and deploys automatically.
+
+Your live site: `https://phoebe-yw.github.io/Personal-Website/`
+
+**Backup options:** Netlify and Vercel both offer free hosting and deploy from GitHub in about 2 minutes.
+
+---
+
+## Themes
+
+The site defaults to "manila afternoon" (warm light). Click the sun/moon button in the bottom-right to toggle "espresso cabinet" (dark). Your preference is saved in your browser.
+
+---
+
+## Project structure
+
+```
+src/
+  main.js          app logic, animations, tab interactions
+  style.css        all styles; color tokens at the top
+  sections/        one JS file per tab section
+  posts/           journal posts as Markdown files
+public/
+  resume.pdf       your resume (replace with your actual PDF)
+.github/workflows/
+  deploy.yml       GitHub Actions deploy config
+```

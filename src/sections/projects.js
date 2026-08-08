@@ -2,25 +2,28 @@ const projects = [
   {
     name: 'GovSafe',
     context: 'HackTX &middot; oct 2025',
-    description: 'AI-powered Chrome extension that simplifies government websites for elderly users. Integrated Gemini API for webpage summarization and ElevenLabs for natural voice synthesis; built accessible UI enabling form autofill and independent navigation.',
+    bullets: [
+      'Drove rapid product delivery in a 24-hour hackathon, building an AI Chrome extension that simplified complex government portals for elderly demographics with a custom HTML/CSS/JS frontend and auto-fill capabilities.',
+      'Architected real-time AI pipelines integrating Gemini API for dynamic text summarization and ElevenLabs API for natural voice synthesis, engineering an accessible, low-friction experience for visually and cognitively impaired users.',
+    ],
     tech: ['Gemini API', 'ElevenLabs', 'HTML/CSS/JS'],
   },
   {
-    name: 'LightAlert',
-    context: 'aug 2024 – may 2025',
-    description: 'Motion-activated visual alert system for individuals with hearing disabilities. Selected as one of the top 5 teams at the district STEM Showcase.',
-    tech: ['Arduino', 'C++', 'PIR sensor', 'LED'],
-  },
-  {
     name: 'Proxi',
-    context: 'Texas Convergent &middot; fall 2025',
-    description: 'IoT smart glasses using Raspberry Pi and machine learning to monitor screen-viewing distance and reduce eye strain. Paired with a React Native mobile app for real-time behavioral alerts.',
-    tech: ['Raspberry Pi', 'Python', 'React Native', 'MongoDB'],
+    context: 'Texas Convergent &middot; sept – dec 2025',
+    bullets: [
+      'Spearheaded IoT smart glasses ecosystem to reduce digital eye strain, achieving sub-second alerts and a >95% payload reduction by running local YOLO object detection on a Raspberry Pi and transmitting metadata via MQTT.',
+      'Architected a multi-tier data pipeline (Flask, Node.js, MongoDB) to process screen-time sessions, launching a cross-platform React Native app that delivered real-time usage analytics and historical health trends.',
+      'Directed product security strategy, achieving zero critical vulnerabilities by conducting network penetration testing (Kali Linux, Wireshark) and applying OSINT capstone research on wearable threat vectors.',
+    ],
+    tech: ['Raspberry Pi', 'Python', 'YOLO', 'MQTT', 'Flask', 'Node.js', 'React Native', 'MongoDB', 'Kali Linux'],
   },
   {
     name: 'Python Face Recognition Attendance',
     context: 'feb – apr 2025',
-    description: 'Automated attendance tracking system using facial recognition. Implemented OpenCV and Dlib for accurate facial landmark detection and embeddings.',
+    bullets: [
+      'Built an automated attendance tracking system using facial recognition with OpenCV and Dlib for accurate facial landmark detection and embeddings.',
+    ],
     tech: ['Python', 'OpenCV', 'Dlib'],
   },
 ]
@@ -34,7 +37,9 @@ function renderProject(p) {
           <p class="entry-role">${p.context}</p>
         </div>
       </div>
-      <p class="body-text" style="margin-top: 5px;">${p.description}</p>
+      <ul class="entry-bullets" aria-label="Highlights" style="margin-top: 5px;">
+        ${p.bullets.map(b => `<li>${b}</li>`).join('')}
+      </ul>
       <div class="chips" style="margin-top: 8px;">
         ${p.tech.map(t => `<span class="chip">${t}</span>`).join('')}
       </div>

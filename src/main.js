@@ -9,10 +9,8 @@ import projects   from './sections/projects.js'
 import skills     from './sections/skills.js'
 import resume     from './sections/resume.js'
 import contact    from './sections/contact.js'
-import journal    from './sections/journal.js'
-
 // Map section names (matching data-section attributes) to their render functions
-const SECTIONS = { about, experience, projects, skills, resume, contact, journal }
+const SECTIONS = { about, experience, projects, skills, resume, contact }
 
 // ── DOM references ──────────────────────────────────────────
 const page    = document.querySelector('.folder__page')
