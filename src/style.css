@@ -23,7 +23,7 @@
   --bg:           #EDE6D6;   /* bone parchment, the desk surface */
   --kraft:        #C5A97A;   /* warm kraft / manila cardstock */
   --kraft-edge:   #A8895C;   /* darker strip showing folder thickness */
-  --tab-off:      #B9A882;   /* unselected tab */
+  --tab-off:      #C8B891;   /* unselected tab */
   --tab-on:       #D4C4A6;   /* active tab — lighter, pulls forward */
   --page:         #F5EFE0;   /* cream interior page */
   --text-h:       #2E2419;   /* dark espresso — headings */
@@ -111,8 +111,15 @@ a {
 .folder-wrap {
   position: relative;
   width: min(820px, calc(100vw - 120px));
-  /* The drop-shadow follows the real shape of the element (including tabs) */
-  filter: drop-shadow(0 18px 40px var(--shadow-lg));
+  filter: drop-shadow(0 14px 36px rgba(46, 36, 25, 0.18));
+  transition:
+    transform  0.42s cubic-bezier(0.22, 1, 0.36, 1),
+    filter     0.42s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.folder-wrap:hover {
+  transform: translateY(-5px) rotate(0.25deg);
+  filter: drop-shadow(0 20px 44px rgba(46, 36, 25, 0.24));
 }
 
 
@@ -126,8 +133,8 @@ a {
   transform: translateX(-50%);
   width: 108px;
   height: 22px;
-  background: var(--kraft);
-  /* Trapezoidal clip: narrower at the top, wider at the bottom */
+  /* Top edge slightly darker (like light hitting from above), fades into the folder body */
+  background: linear-gradient(to bottom, var(--kraft-edge) 0%, var(--kraft) 100%);
   clip-path: polygon(12% 0%, 88% 0%, 100% 100%, 0% 100%);
   transition: background 0.15s ease;
   z-index: 5;
@@ -146,12 +153,18 @@ a {
 .folder {
   position: relative;
   width: 100%;
-  /* Tall enough to feel substantial, short enough to fit in most viewports */
   height: min(540px, calc(100dvh - 130px));
-  background: var(--kraft);
+  background-color: var(--kraft);
+  /* Kraft paper fiber: anisotropic noise (wider horizontal frequency) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65 0.40' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  background-blend-mode: soft-light;
   border-radius: 10px;
-  box-shadow: inset 0 0 80px var(--shadow-sm);
-  transition: background 0.3s ease;
+  /* Directional inset edges only — no radial vignette that bleeds to sides */
+  box-shadow:
+    inset 0  2px 0   rgba(255, 255, 255, 0.24),
+    inset 0 -3px 8px rgba(0, 0, 0, 0.16);
+  transition: background-color 0.3s ease;
   overflow: hidden;
 }
 
@@ -161,10 +174,14 @@ a {
   bottom: 0;
   left: 10px;
   right: 10px;
-  height: 7px;
+  height: 8px;
   background: var(--kraft-edge);
   border-radius: 0 0 8px 8px;
   z-index: 0;
+  /* Inner top highlight + outer cast shadow = believable physical edge */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 3px 6px var(--shadow-md);
   transition: background 0.3s ease;
 }
 
@@ -213,18 +230,23 @@ a {
 .folder__page {
   position: relative;
   margin: 14px;
-  margin-bottom: 21px; /* leave room for the edge strip */
-  /* Fill the folder's height minus top + bottom margins */
+  margin-bottom: 21px;
   height: calc(100% - 35px);
-  background: var(--page);
+  background-color: var(--page);
+  /* Fine cream paper grain: isotropic, higher frequency for a smooth tooth */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  background-blend-mode: soft-light;
   border-radius: 6px;
   padding: 24px 28px;
   overflow-y: auto;
   z-index: 2;
   opacity: 0;
   pointer-events: none;
-  transition: background 0.3s ease;
-  box-shadow: inset 0 0 0 1px var(--shadow-sm);
+  transition: background-color 0.3s ease;
+  box-shadow:
+    inset 0 0 0 1px var(--shadow-sm),
+    inset 0 3px 14px rgba(0, 0, 0, 0.05);
 }
 
 /* Subtle scrollbar so it doesn't look ugly */

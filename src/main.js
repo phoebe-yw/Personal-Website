@@ -52,11 +52,19 @@ function openSection(name) {
     page.style.pointerEvents = 'auto'
 
     gsap.timeline()
-      .to(cover, { opacity: 0, y: -28, duration: 0.32, ease: 'power2.in' })
+      .to(cover, {
+        opacity: 0,
+        y: -28,
+        rotateX: -14,
+        transformPerspective: 900,
+        transformOrigin: '50% 100%',
+        duration: 0.40,
+        ease: 'power2.in',
+      })
       .fromTo(page,
-        { opacity: 0, y: 8 },
-        { opacity: 1, y: 0, duration: 0.26, ease: 'power2.out' },
-        '-=0.08'
+        { opacity: 0, y: 10, scale: 0.985 },
+        { opacity: 1, y: 0,  scale: 1,     duration: 0.28, ease: 'power2.out' },
+        '-=0.10'
       )
 
     isOpen = true
@@ -82,8 +90,16 @@ function closeFolder() {
   if (!isOpen) return
 
   gsap.timeline()
-    .to(page, { opacity: 0, duration: 0.18 })
-    .to(cover, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, '-=0.05')
+    .to(page, { opacity: 0, scale: 0.985, duration: 0.18 })
+    .to(cover, {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transformPerspective: 900,
+      transformOrigin: '50% 100%',
+      duration: 0.32,
+      ease: 'power2.out',
+    }, '-=0.05')
     .set(page, { pointerEvents: 'none' })
 
   isOpen = false

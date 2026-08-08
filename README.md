@@ -1,6 +1,6 @@
 # Phoebe Wang — Portfolio
 
-**Live site → [phoebe-yw.github.io/Personal-Website](https://phoebe-yw.github.io/Personal-Website/)**
+**Live site → [phoebe-yw.github.io/web](https://phoebe-yw.github.io/web/)**
 
 A personal portfolio built to look like a kraft paper file folder. Click a tab on the right edge to open that section; click it again (or the top notch) to close the folder.
 
