@@ -22,15 +22,15 @@ export default function about() {
         <span class="chip">product management</span>
         <span class="chip">robotics &amp; ml</span>
         <span class="chip">ai strategy</span>
-        <span class="chip">content creation</span>
+
         <span class="chip">cybersecurity</span>
       </div>
 
       <div style="margin-top: 20px; border-top: 1px solid var(--divider); padding-top: 14px;">
         <p class="entry-org">The University of Texas at Austin</p>
-        <p class="entry-role">b.s. computer science &middot; gpa 3.38 &middot; graduating may 2028</p>
+        <p class="entry-role">b.s. computer science &middot; graduating may 2028</p>
         <p class="body-text text-muted" style="margin-top: 6px; font-size: 0.70rem;">
-          data structures &amp; algorithms &middot; computer org &amp; architecture &middot;
+          data structures &amp; algorithms &middot; computer org &amp; architecture &middot; operating systems &middot;
           probability &amp; statistics &middot; linear algebra
         </p>
       </div>

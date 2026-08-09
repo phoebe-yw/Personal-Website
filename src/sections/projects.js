@@ -1,14 +1,5 @@
 const projects = [
   {
-    name: 'GovSafe',
-    context: 'HackTX &middot; oct 2025',
-    bullets: [
-      'Drove rapid product delivery in a 24-hour hackathon, building an AI Chrome extension that simplified complex government portals for elderly demographics with a custom HTML/CSS/JS frontend and auto-fill capabilities.',
-      'Architected real-time AI pipelines integrating Gemini API for dynamic text summarization and ElevenLabs API for natural voice synthesis, engineering an accessible, low-friction experience for visually and cognitively impaired users.',
-    ],
-    tech: ['Gemini API', 'ElevenLabs', 'HTML/CSS/JS'],
-  },
-  {
     name: 'Proxi',
     context: 'Texas Convergent &middot; sept – dec 2025',
     bullets: [
@@ -17,6 +8,15 @@ const projects = [
       'Directed product security strategy, achieving zero critical vulnerabilities by conducting network penetration testing (Kali Linux, Wireshark) and applying OSINT capstone research on wearable threat vectors.',
     ],
     tech: ['Raspberry Pi', 'Python', 'YOLO', 'MQTT', 'Flask', 'Node.js', 'React Native', 'MongoDB', 'Kali Linux'],
+  },
+  {
+    name: 'GovSafe',
+    context: 'HackTX &middot; oct 2025',
+    bullets: [
+      'Drove rapid product delivery in a 24-hour hackathon, building an AI Chrome extension that simplified complex government portals for elderly demographics with a custom HTML/CSS/JS frontend and auto-fill capabilities.',
+      'Architected real-time AI pipelines integrating Gemini API for dynamic text summarization and ElevenLabs API for natural voice synthesis, engineering an accessible, low-friction experience for visually and cognitively impaired users.',
+    ],
+    tech: ['Gemini API', 'ElevenLabs', 'HTML/CSS/JS'],
   },
   {
     name: 'Python Face Recognition Attendance',

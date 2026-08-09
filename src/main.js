@@ -58,13 +58,13 @@ function openSection(name) {
         rotateX: -14,
         transformPerspective: 900,
         transformOrigin: '50% 100%',
-        duration: 0.40,
+        duration: 0.62,
         ease: 'power2.in',
       })
       .fromTo(page,
         { opacity: 0, y: 10, scale: 0.985 },
-        { opacity: 1, y: 0,  scale: 1,     duration: 0.28, ease: 'power2.out' },
-        '-=0.10'
+        { opacity: 1, y: 0,  scale: 1,     duration: 0.44, ease: 'power2.out' },
+        '-=0.16'
       )
 
     isOpen = true
@@ -73,10 +73,10 @@ function openSection(name) {
     // Already open — just swap the content with a quick cross-fade
     gsap.to(page, {
       opacity: 0,
-      duration: 0.14,
+      duration: 0.34,
       onComplete: () => {
         page.innerHTML = SECTIONS[name]()
-        gsap.to(page, { opacity: 1, duration: 0.22 })
+        gsap.to(page, { opacity: 1, duration: 0.52 })
       }
     })
   }
@@ -90,16 +90,16 @@ function closeFolder() {
   if (!isOpen) return
 
   gsap.timeline()
-    .to(page, { opacity: 0, scale: 0.985, duration: 0.18 })
+    .to(page, { opacity: 0, scale: 0.985, duration: 0.28 })
     .to(cover, {
       opacity: 1,
       y: 0,
       rotateX: 0,
       transformPerspective: 900,
       transformOrigin: '50% 100%',
-      duration: 0.32,
+      duration: 0.58,
       ease: 'power2.out',
-    }, '-=0.05')
+    }, '-=0.10')
     .set(page, { pointerEvents: 'none' })
 
   isOpen = false
@@ -176,8 +176,8 @@ gsap.from('.folder__notch', {
 gsap.from('.tab', {
   opacity: 0,
   x: 18,
-  duration: 0.38,
-  stagger: 0.06,
+  duration: 0.62,
+  stagger: 0.13,
   ease: 'power2.out',
   delay: 0.55,
 })
