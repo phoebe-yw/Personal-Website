@@ -1,5 +1,16 @@
 const projects = [
   {
+    name: 'ReadEasy',
+    context: 'SASE Roots Competition &middot; apr 2026',
+    bullets: [
+      'Won 1st place at the SASE Roots case competition by pitching a $0-cost accessibility tool addressing a market of 780M+ people with reading difficulties, backed by a feature-by-feature comparison against current solutions on the market',
+      'Drove competitive positioning by benchmarking the product against Adobe Acrobat, Read&amp;Write, Natural Reader, and 3 others across 6 criteria (OCR, dyslexia fonts, read-aloud, cost, account requirement, bionic reading), surfacing the gap no incumbent filled.',
+      'Owned the product end-to-end — from user research on dyslexia accessibility needs through implementation (OCR pipeline, PDF rendering, text-to-speech integration) to the go-to-market pitch — as technical product lead on a 4-person team.',
+    ],
+    tech: ['OCR', 'PDF rendering', 'Text-to-speech', 'Python'],
+    link: { label: 'view presentation', href: 'https://canva.link/8r83yb99qyuuelh' },
+  },
+  {
     name: 'Proxi',
     context: 'Texas Convergent &middot; sept – dec 2025',
     bullets: [
@@ -8,6 +19,7 @@ const projects = [
       'Directed product security strategy, achieving zero critical vulnerabilities by conducting network penetration testing (Kali Linux, Wireshark) and applying OSINT capstone research on wearable threat vectors.',
     ],
     tech: ['Raspberry Pi', 'Python', 'YOLO', 'MQTT', 'Flask', 'Node.js', 'React Native', 'MongoDB', 'Kali Linux'],
+    link: { label: 'view presentation', href: 'https://canva.link/z5te5a0rid06tu3' },
   },
   {
     name: 'GovSafe',
@@ -17,6 +29,7 @@ const projects = [
       'Architected real-time AI pipelines integrating Gemini API for dynamic text summarization and ElevenLabs API for natural voice synthesis, engineering an accessible, low-friction experience for visually and cognitively impaired users.',
     ],
     tech: ['Gemini API', 'ElevenLabs', 'HTML/CSS/JS'],
+    link: { label: 'view presentation', href: 'https://canva.link/dgo1iene0hfdz3v' },
   },
   {
     name: 'Python Face Recognition Attendance',
@@ -36,6 +49,7 @@ function renderProject(p) {
           <p class="entry-org">${p.name}</p>
           <p class="entry-role">${p.context}</p>
         </div>
+        ${p.link ? `<a class="entry-link" href="${p.link.href}" target="_blank" rel="noopener noreferrer">${p.link.label} ↗</a>` : ''}
       </div>
       <ul class="entry-bullets" aria-label="Highlights" style="margin-top: 5px;">
         ${p.bullets.map(b => `<li>${b}</li>`).join('')}

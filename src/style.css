@@ -434,6 +434,20 @@ a {
   padding-top: 2px;
 }
 
+.entry-link {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding-top: 2px;
+  transition: color 0.3s ease;
+}
+
+.entry-link:hover {
+  color: var(--text-h);
+}
+
 .entry-bullets {
   list-style: none;
   margin-top: 6px;

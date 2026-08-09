@@ -31,6 +31,7 @@ const entries = [
       'Drove data-informed decisions by synthesizing 4,132 reviews in Tableau to flag 41 at-risk products; built cross-functional financial models projecting 185.7% Year-1 ROI, $250K annual labor savings, and 8,800 hours saved.',
       'Validated infrastructure architecture with Dell SMEs, configuring GPU-accelerated compute (PowerEdge R760xa) and storage (PowerScale) to design a 4-quarter SDLC roadmap that reduced decision speeds from multi-day delays to &lt;1 day.',
     ],
+    link: { label: 'view presentation', href: 'https://canva.link/8vlujh9mlhkp1yx' },
   },
 ]
 
@@ -42,6 +43,10 @@ const leadership = [
     location: 'Austin, TX',
     bullets: [
       'Manage digital marketing and event outreach across Instagram, Discord, and the weekly newsletter to drive UTCS community engagement.',
+    ],
+    links: [
+      { label: 'website', href: 'https://www.texasacm.org/' },
+      { label: 'instagram', href: 'https://www.instagram.com/texas_acm/' },
     ],
   },
   {
@@ -63,6 +68,7 @@ const leadership = [
       'Studied networking, system administration, malware analysis, and digital forensics using Kali Linux, VirusTotal, BeEF, WireShark, and CyberChef.',
       'Completed capstone project investigating criminal activity via open-source intelligence gathering.',
     ],
+    link: { label: 'view capstone presentation', href: 'https://docs.google.com/presentation/d/1O_C_-pTP3NCdfOiA0KT6CQOW6Z4mvMC-/edit?usp=sharing&ouid=110891598124547959569&rtpof=true&sd=true' },
   },
   {
     org: 'Engineering Academy',
@@ -76,14 +82,15 @@ const leadership = [
 ]
 
 function renderEntry(e) {
+  const allLinks = e.links ?? (e.link ? [e.link] : [])
+  const linkHtml = allLinks.map(l => `<a class="entry-link" href="${l.href}" target="_blank" rel="noopener noreferrer">${l.label} ↗</a>`).join('')
   return /* html */`
     <div class="entry">
-      <div class="entry-meta">
-        <div>
-          <p class="entry-org">${e.org}</p>
-          <p class="entry-role">${e.role}${e.location ? ` &middot; ${e.location}` : ''}</p>
-        </div>
-        <span class="entry-date">${e.date}</span>
+      <div style="display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 8px;">
+        <p class="entry-org">${e.org}</p>
+        <span class="entry-date" style="justify-self:end;">${e.date}</span>
+        <p class="entry-role">${e.role}${e.location ? ` &middot; ${e.location}` : ''}</p>
+        ${allLinks.length ? `<div style="display:flex;gap:10px;justify-self:end;margin-top:-5px;">${linkHtml}</div>` : '<span></span>'}
       </div>
       ${e.bullets.length ? `
         <ul class="entry-bullets" aria-label="Highlights">
