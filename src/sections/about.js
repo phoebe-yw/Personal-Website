@@ -11,11 +11,11 @@ export default function about() {
       </div>
 
       <p class="body-text">
-        Hi! I'm a Computer Science student at UT Austin (Class of 2028), passionate about
-        building things where technology meets people. I'm currently interning at IBM in Lowell, MA
-        as a Product Manager Intern on the Guardium Data Protection team. I previously researched
-        robot learning at UT's RobIn lab, serve as ACM's Marketing Junior Officer, and love dancing,
-        playing piano, and making short-form content in my free time.
+        Hi! I'm a Computer Science student at UT Austin, passionate about building
+        things where technology meets people. I interned at IBM as a Product Manager on the Guardium
+        Data Protection team, previously researched robot learning at UT's RobIn lab, and serve as
+        Texas ACM's Marketing Junior Officer. I'm seeking opportunities to deepen my experiences in product management, software
+        engineering, and AI. Feel free to reach out, I'd love to connect!
       </p>
 
       <div class="chips" style="margin-top: 14px;">
